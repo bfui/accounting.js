@@ -17,6 +17,8 @@ Made with love by [@josscrowcroft](http://twitter.com/josscrowcroft) and some ex
 
 ## Changelog
 
+**v0.3.3** - **unformat** now returns `NaN` by default if it can't parse a number. Adds a third param to **unformat** called `options` such that if `options.returnNaN` is falsy, zero will be return rather than `NaN`
+
 **v0.3.2** - Fix package.json dependencies (should be empty object) and tweak comments
 
 **v0.3.0**
