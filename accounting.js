@@ -1,5 +1,5 @@
 /*!
- * accounting.js v0.3.2
+ * accounting.js v0.3.3
  * Copyright 2011, Joss Crowcroft
  *
  * Freely distributable under the MIT license.
@@ -17,7 +17,7 @@
 	var lib = {};
 
 	// Current version
-	lib.version = '0.3.2';
+	lib.version = '0.3.3';
 
 
 	/* --- Exposed settings --- */
@@ -176,7 +176,10 @@
 	 *
 	 * Doesn't throw any errors (`NaN`s become 0) but this may change in future
 	 */
-	var unformat = lib.unformat = lib.parse = function(value, decimal) {
+	var unformat = lib.unformat = lib.parse = function(value, decimal, options) {
+		var options = options || {};
+		var returnNaN = (options.returnNaN !== undefined) ? options.returnNaN : true;
+
 		// Recursively unformat arrays:
 		if (isArray(value)) {
 			return map(value, function(val) {
@@ -203,7 +206,7 @@
 			);
 
 		// This will fail silently which may cause trouble, let's wait and see:
-		return !isNaN(unformatted) ? unformatted : 0;
+		return isNaN(unformatted) ? (returnNaN ? NaN : 0) : unformatted;
 	};
 
 
